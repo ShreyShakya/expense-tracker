@@ -1,19 +1,15 @@
-let expenses = [{
-    name: 'Phone',
-    amount: 52999
-}, {
-    name: 'Laptop',
-    amount: 140000
-}, {
-    name: 'Mouse',
-    amount: 1000
-}]
+let expenses = []
 
 const expenseNameInput = document.querySelector('#expenseNameInput')
 const expenseAmountInput = document.querySelector('#expenseAmountInput')
 const addExpenseBtn = document.querySelector('#addExpenseBtn')
 const expenseList = document.querySelector('#expenseList')
 const totalExpenseDisplay = document.querySelector("#totalExpense")
+
+function calculateTotalExpense(arr) {
+    return arr.reduce((total, expense) => total + expense.amount, 0)
+}
+totalExpenseDisplay.textContent = `Total expense: ${calculateTotalExpense(expenses)}`
 
 addExpenseBtn.addEventListener("click", function () {
     const expenseName = expenseNameInput.value
@@ -36,22 +32,20 @@ addExpenseBtn.addEventListener("click", function () {
     expenseNameInput.value = ""
     expenseAmountInput.value = ""
 
-    let totalExpense = expenses.reduce((total, expense) => total + expense.amount, 0)
-    totalExpenseDisplay.textContent = `Total expense: ${totalExpense}`
+    totalExpenseDisplay.textContent = `Total expense: ${calculateTotalExpense(expenses)}`
 
     const newExpense = document.createElement("li")
     newExpense.textContent = `${expenseName} — ${expenseAmount}`
     expenseList.append(newExpense)
 
-    let currentExpense = expenses.indexOf(newExpenseData)
 
     const removeBtn = document.createElement("button")
     removeBtn.textContent = "Remove"
     removeBtn.addEventListener("click", function () {
+        let currentExpense = expenses.indexOf(newExpenseData)
         newExpense.remove()
         expenses.splice(currentExpense, 1)
-        let totalExpense = expenses.reduce((total, expense) => total + expense.amount, 0)
-        totalExpenseDisplay.textContent = `Total expense: ${totalExpense}`
+        totalExpenseDisplay.textContent = `Total expense: ${calculateTotalExpense(expenses)}`
     })
 
     newExpense.append(removeBtn)
