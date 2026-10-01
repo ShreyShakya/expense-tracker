@@ -1,17 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-    <input id="expenseNameInput" placeholder="Name">
-    <input id="expenseAmountInput" placeholder="Amount">
-    <button id="addExpenseBtn">Add Expense</button>
-    <button id="clearExpensesBtn">Clear All</button>
-    <ul id="expenseList"></ul>
-    <p id="totalExpense">Total expense:</p>
+    <main>
+        <p id="title">Expense<br>Tracker.</p>
+        <div id="div-first">
+            <input id="expenseNameInput" placeholder="Name">
+            <input id="expenseAmountInput" placeholder="Amount">
+        </div>
+
+        <div id="div-buttons">
+            <button id="addExpenseBtn">Add Expense</button>
+            <button id="clearExpensesBtn">Clear All</button>
+        </div>
+
+        <div id="div-second">
+            <ul id="expenseList"></ul>
+        </div>
+
+        <div id="div-third">
+            <p id="totalExpense">Total expense:</p>
+        </div>
+    </main>
     <script src="script.js" defer></script>
 </body>
+
 </html>
