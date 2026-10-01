@@ -5,6 +5,7 @@ const expenseAmountInput = document.querySelector('#expenseAmountInput')
 const addExpenseBtn = document.querySelector('#addExpenseBtn')
 const expenseList = document.querySelector('#expenseList')
 const totalExpenseDisplay = document.querySelector("#totalExpense")
+const clearExpensesBtn = document.querySelector('#clearExpensesBtn')
 
 function calculateTotalExpense(arr) {
     return arr.reduce((total, expense) => total + expense.amount, 0)
@@ -49,5 +50,12 @@ addExpenseBtn.addEventListener("click", function () {
     })
 
     newExpense.append(removeBtn)
+})
+
+clearExpensesBtn.addEventListener("click", function () {
+    expenses.length = 0
+    expenseList.replaceChildren()
+    totalExpenseDisplay.textContent = `Total expense: ${calculateTotalExpense(expenses)}`
+
 })
 
