@@ -7,7 +7,7 @@ let expenses = [{
 }, {
     name: 'Mouse',
     amount: 1000
-} ]
+}]
 
 const expenseNameInput = document.querySelector('#expenseNameInput')
 const expenseAmountInput = document.querySelector('#expenseAmountInput')
@@ -15,18 +15,27 @@ const addExpenseBtn = document.querySelector('#addExpenseBtn')
 const expenseList = document.querySelector('#expenseList')
 const totalExpenseDisplay = document.querySelector("#totalExpense")
 
-addExpenseBtn.addEventListener("click", function() {
+addExpenseBtn.addEventListener("click", function () {
     const expenseName = expenseNameInput.value
     const expenseAmount = Number(expenseAmountInput.value)
-    expenses.push({name: expenseName, amount: expenseAmount})
+
+    if (expenseName === "" || expenseAmount === 0) {
+        alert('Please fill the required fields first!')
+        return
+    } else if (expenseAmount < 0) {
+        alert('Please enter an appropriate amount!')
+        return
+    }
+
+    expenses.push({ name: expenseName, amount: expenseAmount })
     expenseNameInput.value = ""
     expenseAmountInput.value = ""
 
     let totalExpense = expenses.reduce((total, expense) => total + expense.amount, 0)
     totalExpenseDisplay.textContent = `Total expense: ${totalExpense}`
-    
+
     const newExpense = document.createElement("li")
-    newExpense.textContent = `${expenseName} ${expenseAmount}`
+    newExpense.textContent = `${expenseName} — ${expenseAmount}`
     expenseList.append(newExpense)
 })
 
