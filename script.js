@@ -27,7 +27,12 @@ addExpenseBtn.addEventListener("click", function () {
         return
     }
 
-    expenses.push({ name: expenseName, amount: expenseAmount })
+    const newExpenseData = {
+        name: expenseName,
+        amount: expenseAmount
+    }
+
+    expenses.push(newExpenseData)
     expenseNameInput.value = ""
     expenseAmountInput.value = ""
 
@@ -37,5 +42,18 @@ addExpenseBtn.addEventListener("click", function () {
     const newExpense = document.createElement("li")
     newExpense.textContent = `${expenseName} — ${expenseAmount}`
     expenseList.append(newExpense)
+
+    let currentExpense = expenses.indexOf(newExpenseData)
+
+    const removeBtn = document.createElement("button")
+    removeBtn.textContent = "Remove"
+    removeBtn.addEventListener("click", function () {
+        newExpense.remove()
+        expenses.splice(currentExpense, 1)
+        let totalExpense = expenses.reduce((total, expense) => total + expense.amount, 0)
+        totalExpenseDisplay.textContent = `Total expense: ${totalExpense}`
+    })
+
+    newExpense.append(removeBtn)
 })
 
