@@ -42,7 +42,7 @@ addExpenseBtn.addEventListener("click", function () {
     newExpense.textContent = `${expenseName} — ${expenseAmount}`
     expenseList.append(newExpense)
 
-
+    //remove button
     const removeBtn = document.createElement("button")
     removeBtn.textContent = "Remove"
     removeBtn.addEventListener("click", function () {
@@ -53,6 +53,28 @@ addExpenseBtn.addEventListener("click", function () {
     })
 
     newExpense.append(removeBtn)
+
+    //edit button
+    const editBtn = document.createElement("button")
+    editBtn.textContent = "Edit"
+    editBtn.addEventListener("click", function () {
+        const newAmount = Number(prompt("Enter the new amount: "))
+        if (newAmount === 0) {
+            alert('Please fill the required fields first!')
+            return
+        } else if (newAmount < 0) {
+            alert('Please enter an appropriate amount!')
+            return
+        } else if (Number.isNaN(newAmount)) {
+            alert('Please enter an appropriate amount!')
+            return
+        }
+        newExpenseData.amount = newAmount
+        newExpense.firstChild.nodeValue = `${expenseName} — ${newAmount}`
+        totalExpenseDisplay.textContent = `Total expense: ${calculateTotalExpense(expenses)}`
+    })
+
+    newExpense.append(editBtn)
 })
 
 clearExpensesBtn.addEventListener("click", function () {
