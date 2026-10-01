@@ -22,6 +22,9 @@ addExpenseBtn.addEventListener("click", function () {
     } else if (expenseAmount < 0) {
         alert('Please enter an appropriate amount!')
         return
+    } else if (Number.isNaN(expenseAmount)) {
+        alert('Please enter an appropriate amount!')
+        return
     }
 
     const newExpenseData = {
